@@ -331,6 +331,8 @@ const processJson = function(data,socket) {
 
 		/* Grab Base Labels/Tags */
 		tags = { session: data.device_id, action: data.action, source: 'jitsi' };
+
+		log('%data:green JITSI HELLO WORLD [%s]',stringify(data) );
 		  
 		/* Jitsi userProps as tags */
 		if (data.user){	
