@@ -48,18 +48,30 @@ exports.insert = function(bulk,id){
 	var count = 0;
 	var groups = 0;
 	var labels = "";
+	var line_labels = [];
 	var dataset = groupBy(bulk,'type');
 
 	for (var xid in dataset){
-	     if(uniq.indexOf(xid) == -1) {
+		if(uniq.indexOf(xid) == -1) {
 		uniq[xid] = count;
 		line.streams.push({"labels": "", "entries": [] });
 	     }
-	     line.streams[uniq[xid]].labels="{type=\"json\", id=\""+xid+"\"}";
+			 line_labels["type"]="json";
+			 line_labels["id"]=xid;
 	     dataset[xid].forEach(function(row){
+				 				if (row.data_header && Object.keys(row.data_header).length>0) {
+									Object.keys(row.data_header).forEach((header) => {
+										line_labels[header] = row.data_header[header];
+									});
+								 }
                 line.streams[uniq[xid]].entries.push({ "ts": new Date().toISOString(), "line": JSON.stringify(row.raw)  });
              });
 	     count++;
+			 var larr=[];
+			 Object.keys(line_labels).forEach((ll) => {
+				 larr.push(`${ll}="${line_labels[ll]}"`)
+			 });
+	     line.streams[uniq[xid]].labels='{'+larr.join(', ')+'}';
 	}
 	line = JSON.stringify(line);
 	// POST Bulk to Loki
