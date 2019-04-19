@@ -68,13 +68,13 @@ exports.insert = function(bulk,id){
 	var labels = "";
 	var dataset = groupBy(bulk,'type');
 
-	datasetByLabel = datasetByLabel(dataset);
-	for (var label in datasetByLabel){
+	dataByLabel = datasetByLabel(dataset);
+	for (var label in dataByLabel){
 		if(uniq.indexOf(label) == -1) {
 			uniq[label] = count;
 			line.streams.push({"labels": "", "entries": [] });
 		}
-		dataset[label].forEach(function(row){
+		dataByLabel[label].forEach(function(row){
 			line.streams[uniq[label]].entries.push({ "ts": new Date().toISOString(), "line": JSON.stringify(row.raw)  });
 		});
 		count++;
