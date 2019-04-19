@@ -69,7 +69,9 @@ exports.insert = function(bulk,id){
 	var dataset = groupBy(bulk,'type');
 
 	dataByLabel = datasetByLabel(dataset);
-	for (var label in dataByLabel){
+	if (config.debug) log('DATA BY LABEL: %s',JSON.stringify(dataByLabel));
+	for (var label in dataByLabel) {
+		if (config.debug) log('PROCESSING LABEL: %s',JSON.stringify(label));
 		if(uniq.indexOf(label) == -1) {
 			uniq[label] = count;
 			line.streams.push({"labels": "", "entries": [] });
