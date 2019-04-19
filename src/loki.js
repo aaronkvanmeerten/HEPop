@@ -40,8 +40,8 @@ const labelFromRow = (row,type,id) => {
 	label=[];
 	label.push(`type="${type}"`);
 	label.push(`id="${id}"`);
-	for (var header in row.data_headers) {
-		label.push(`${header}="${row.data_headers[header]}"`);
+	for (var header in row.data_header) {
+		label.push(`${header}="${row.data_header[header]}"`);
 	}
 	return '{'+label.join(', ') + '}';
 };
