@@ -46,11 +46,11 @@ const labelFromRow = (row,type,id) => {
 	return '{'+label.join(', ') + '}';
 };
 
-const datasetByLabel = (dataset) => {
+const datasetByLabel = (dataset, type) => {
 	var dataByLabel = {};
 	for (var xid in dataset) {
 		dataset[xid].forEach((row) => {
-			var label = labelFromRow(row,row.raw.type,xid);
+			var label = labelFromRow(row,type,xid);
 			if (!dataByLabel.hasOwnProperty(label)) {
 				dataByLabel[label] = [];
 			}
@@ -74,7 +74,7 @@ exports.insert = function(bulk,id){
 	var labels = "";
 	var dataset = groupBy(bulk,'type');
 
-	dataByLabel = datasetByLabel(dataset);
+	dataByLabel = datasetByLabel(dataset,'json');
 	if (config.debug) log('DATA BY LABEL: %s',JSON.stringify(dataByLabel));
 	for (var label in dataByLabel) {
 		if (config.debug) log('PROCESSING LABEL: %s',JSON.stringify(label));
