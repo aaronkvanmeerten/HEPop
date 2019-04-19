@@ -37,7 +37,13 @@ const groupBy = (items, key) => items.reduce(
 );
 
 const labelFromRow = (row,type,id) => {
-
+	label=[];
+	label.push(`type="${type}"`);
+	label.push(`id="${id}"`);
+	for (var header in row.data_headers) {
+		label.push(`${header}="${row.data_headers[header]}"`);
+	}
+	return '{'+label.join(', ') + '}';
 };
 
 const datasetByLabel = (dataset) => {
