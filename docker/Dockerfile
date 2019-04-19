@@ -2,7 +2,7 @@
 FROM node:8
 
 # BUILD FORCE
-ENV BUILD 703065
+#ENV BUILD 703065
 
 # Requires HOMER7-UI Git
 RUN git clone --single-branch --branch dev https://github.com/aaronkvanmeerten/hepop /app
