@@ -41,7 +41,7 @@ const labelFromRow = (row,type,id) => {
 };
 
 const datasetByLabel = (dataset) => {
-	datasetByLabel={};
+	var datasetByLabel = {};
 	for (var xid in datatset) {
 		dataset[xid].forEach((row) => {
 			var label = labelFromRow(row);
