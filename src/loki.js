@@ -41,17 +41,17 @@ const labelFromRow = (row,type,id) => {
 };
 
 const datasetByLabel = (dataset) => {
-	var datasetByLabel = {};
+	var dataByLabel = {};
 	for (var xid in datatset) {
 		dataset[xid].forEach((row) => {
 			var label = labelFromRow(row);
-			if (!datasetByLabel.hasOwnProperty(label)) {
-				datasetByLabel[label] = [];
+			if (!dataByLabel.hasOwnProperty(label)) {
+				dataByLabel[label] = [];
 			}
-			datasetByLabel[label].push(row);
+			dataByLabel[label].push(row);
 		})
 	}
-	return datasetByLabel;
+	return dataByLabel;
 }
 
 var rawSize = config.db.rawSize || 8000;
