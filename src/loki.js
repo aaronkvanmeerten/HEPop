@@ -50,7 +50,7 @@ const datasetByLabel = (dataset) => {
 	var dataByLabel = {};
 	for (var xid in dataset) {
 		dataset[xid].forEach((row) => {
-			var label = labelFromRow(row);
+			var label = labelFromRow(row,row.raw.type,xid);
 			if (!dataByLabel.hasOwnProperty(label)) {
 				dataByLabel[label] = [];
 			}
