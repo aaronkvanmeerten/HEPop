@@ -14,7 +14,7 @@ EXPOSE 9060
 EXPOSE 8080
 
 # Configure entrypoint
-COPY /config/myconfig.js /app/config/myconfig.js
+COPY myconfig.js /app/config/myconfig.js
 COPY /docker-entrypoint.sh /
 COPY /docker-entrypoint.d/* /docker-entrypoint.d/
 RUN chmod +x /docker-entrypoint.d/* /docker-entrypoint.sh

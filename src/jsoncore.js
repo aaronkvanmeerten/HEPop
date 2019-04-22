@@ -341,8 +341,14 @@ const processJson = function(data,socket) {
 		   if(data.user.browser_name) { tags.browser = data.user.browser_name; }
 		}
 
+		log('%data:green JITSI TAGS [%s]',stringify(tags) );
+
 		// REPORT COUNTER (DEV)
 		metrics.increment(metrics.counter("jitsi", tags, 'report' ), 1 );
+
+		if(data.action == "page.load.failed") {
+			metrics.increment(metrics.counter("jitsi", tags, "conference-failed" ), 1);
+		}
 
 		if(data.attributes && data.action == "rtp.stats"){
 			
@@ -385,7 +391,7 @@ const processJson = function(data,socket) {
 	  if (buckets[key]) buckets[key].push(insert);
 
 
-	} catch(err) { log('%error:red %s', err.toString() ) }
+	} catch(err) { log('%error:red %s', (err ? err.toString() : err) ) }
 };
 
 exports.processJson = processJson;
