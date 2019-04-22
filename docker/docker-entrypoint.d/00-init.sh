@@ -18,24 +18,24 @@ INFLUXDB_PORT=${INFLUXDB_PORT:-8086}
 INFLUXDB_DB=${INFLUXDB_DB:-homer}
 
 
-if [ -f /app/myconfig.js ]; then
+if [ -f /app/config/myconfig.js ]; then
 
-   if [ -n "$PGSQL_HOST" ]; then sed -i "s/PGSQL_HOST/${PGSQL_HOST}/g" /app/myconfig.js; fi
-   if [ -n "$PGSQL_PORT" ]; then sed -i "s/PGSQL_PORT/${PGSQL_PORT}/g" /app/myconfig.js; fi
-   if [ -n "$PGSQL_USER" ]; then sed -i "s/PGSQL_USER/${PGSQL_USER}/g" /app/myconfig.js; fi
-   if [ -n "$PGSQL_PASSWORD" ]; then sed -i "s/PGSQL_PASSWORD/${PGSQL_PASSWORD}/g" /app/myconfig.js; fi
-   if [ -n "$PGSQL_DBNAME" ]; then sed -i "s/PGSQL_DBNAME/${PGSQL_DBNAME}/g" /app/myconfig.js; fi
-   if [ -n "$PGSQL_TBNAME" ]; then sed -i "s/PGSQL_TBNAME/${PGSQL_TBNAME}/g" /app/myconfig.js; fi
+   if [ -n "$PGSQL_HOST" ]; then sed -i "s/PGSQL_HOST/${PGSQL_HOST}/g" /app/config/myconfig.js; fi
+   if [ -n "$PGSQL_PORT" ]; then sed -i "s/PGSQL_PORT/${PGSQL_PORT}/g" /app/config/myconfig.js; fi
+   if [ -n "$PGSQL_USER" ]; then sed -i "s/PGSQL_USER/${PGSQL_USER}/g" /app/config/myconfig.js; fi
+   if [ -n "$PGSQL_PASSWORD" ]; then sed -i "s/PGSQL_PASSWORD/${PGSQL_PASSWORD}/g" /app/config/myconfig.js; fi
+   if [ -n "$PGSQL_DBNAME" ]; then sed -i "s/PGSQL_DBNAME/${PGSQL_DBNAME}/g" /app/config/myconfig.js; fi
+   if [ -n "$PGSQL_TBNAME" ]; then sed -i "s/PGSQL_TBNAME/${PGSQL_TBNAME}/g" /app/config/myconfig.js; fi
 
-   if [ -n "$INFLUXDB_HOST" ]; then sed -i "s/INFLUXDB_HOST/${INFLUXDB_HOST}/g" /app/myconfig.js; fi
-   if [ -n "$INFLUXDB_PORT" ]; then sed -i "s/INFLUXDB_PORT/${INFLUXDB_PORT}/g" /app/myconfig.js; fi
-   if [ -n "$INFLUXDB_DB" ]; then sed -i "s/INFLUXDB_DB/${INFLUXDB_DB}/g" /app/myconfig.js; fi
+   if [ -n "$INFLUXDB_HOST" ]; then sed -i "s/INFLUXDB_HOST/${INFLUXDB_HOST}/g" /app/config/myconfig.js; fi
+   if [ -n "$INFLUXDB_PORT" ]; then sed -i "s/INFLUXDB_PORT/${INFLUXDB_PORT}/g" /app/config/myconfig.js; fi
+   if [ -n "$INFLUXDB_DB" ]; then sed -i "s/INFLUXDB_DB/${INFLUXDB_DB}/g" /app/config/myconfig.js; fi
 
-   if [ -n "$HEPOP_ID" ]; then sed -i "s/HEPOP_ID/${HEPOP_ID}/g" /app/myconfig.js; fi
-   if [ -n "$HEPOP_HOST" ]; then sed -i "s/HEPOP_HOST/${HEPOP_HOST}/g" /app/myconfig.js; fi
-   if [ -n "$HEPOP_PORT" ]; then sed -i "s/HEPOP_PORT/${HEPOP_PORT}/g" /app/myconfig.js; fi
-   if [ -n "$HEPOP_PROTO" ]; then sed -i "s/HEPOP_PROTO/${HEPOP_PROTO}/g" /app/myconfig.js; fi
-   if [ -n "$HEPOP_DEBUG" ]; then sed -i "s/HEPOP_DEBUG/${HEPOP_DEBUG}/g" /app/myconfig.js; fi
+   if [ -n "$HEPOP_ID" ]; then sed -i "s/HEPOP_ID/${HEPOP_ID}/g" /app/config/myconfig.js; fi
+   if [ -n "$HEPOP_HOST" ]; then sed -i "s/HEPOP_HOST/${HEPOP_HOST}/g" /app/config/myconfig.js; fi
+   if [ -n "$HEPOP_PORT" ]; then sed -i "s/HEPOP_PORT/${HEPOP_PORT}/g" /app/config/myconfig.js; fi
+   if [ -n "$HEPOP_PROTO" ]; then sed -i "s/HEPOP_PROTO/${HEPOP_PROTO}/g" /app/config/myconfig.js; fi
+   if [ -n "$HEPOP_DEBUG" ]; then sed -i "s/HEPOP_DEBUG/${HEPOP_DEBUG}/g" /app/config/myconfig.js; fi
 
 
    echo "Pre-Flight provisioning completed!"
