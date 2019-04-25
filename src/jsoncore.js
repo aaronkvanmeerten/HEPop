@@ -338,6 +338,7 @@ const processJson = function(data,socket) {
 		if (data.user){	
 		   if(data.user.callstats_name) { tags.user = data.user.callstats_name; }
 		   if(data.user.conference_name) { tags.conference = data.user.conference_name; }
+		   if(data.user.url) { tags.url = data.user.url; }
 		   if(data.user.browser_name) { tags.browser = data.user.browser_name; }
 		}
 
