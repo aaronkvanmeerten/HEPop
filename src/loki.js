@@ -36,30 +36,6 @@ const groupBy = (items, key) => items.reduce(
   {},
 );
 
-const labelFromRow = (row,type,id) => {
-	label=[];
-	label.push(`type="${type}"`);
-	label.push(`id="${id}"`);
-	for (var header in row.data_header) {
-		label.push(`${header}="${row.data_header[header]}"`);
-	}
-	return '{'+label.join(', ') + '}';
-};
-
-const datasetByLabel = (dataset, type) => {
-	var dataByLabel = {};
-	for (var xid in dataset) {
-		dataset[xid].forEach((row) => {
-			var label = labelFromRow(row,type,xid);
-			if (!dataByLabel.hasOwnProperty(label)) {
-				dataByLabel[label] = [];
-			}
-			dataByLabel[label].push(row);
-		})
-	}
-	return dataByLabel;
-}
-
 var rawSize = config.db.rawSize || 8000;
 
 // Generating a multi-row insert to /api/prom/push
@@ -74,19 +50,16 @@ exports.insert = function(bulk,id){
 	var labels = "";
 	var dataset = groupBy(bulk,'type');
 
-	dataByLabel = datasetByLabel(dataset,'json');
-	if (config.debug) log('DATA BY LABEL: %s',JSON.stringify(dataByLabel));
-	for (var label in dataByLabel) {
-		if (config.debug) log('PROCESSING LABEL: %s',JSON.stringify(label));
-		if(uniq.indexOf(label) == -1) {
-			uniq[label] = count;
-			line.streams.push({"labels": "", "entries": [] });
-		}
-		dataByLabel[label].forEach(function(row){
-			line.streams[uniq[label]].entries.push({ "ts": new Date().toISOString(), "line": JSON.stringify(row.raw)  });
-		});
-		count++;
-		line.streams[uniq[label]].labels=label;
+	for (var xid in dataset){
+	     if(uniq.indexOf(xid) == -1) {
+		uniq[xid] = count;
+		line.streams.push({"labels": "", "entries": [] });
+	     }
+	     line.streams[uniq[xid]].labels="{type=\"json\", id=\""+xid+"\"}";
+	     dataset[xid].forEach(function(row){
+                line.streams[uniq[xid]].entries.push({ "ts": new Date().toISOString(), "line": JSON.stringify(row.raw)  });
+             });
+	     count++;
 	}
 	line = JSON.stringify(line);
 	// POST Bulk to Loki
