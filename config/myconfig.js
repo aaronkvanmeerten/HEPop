@@ -12,29 +12,23 @@
     "maxSize": 1000,
     "useInterval": true
   },
-  "dbName": "hepic",
+  "dbName": "hep",
   "tableName": "hep",
   "db": {
 	"rawSize": 8000,
-  	"pgsql":{
-  	  "host": "localhost",
-  	  "port": 5432,
-  	  "user": "homer_user",
-  	  "password": "homer_password"
-  	}
+        "loki" : {
+    	  "url": "http://localhost:3100/api/prom/push"
+        }
   },
   "metrics": {
 	"influx":{
 		"period": 30000,
 		"expire": 300000,
-		"dbName": "homer",
+		"dbName": "hep",
 		"hostname": "localhost:8086"
 	}
   },
   "db_off": {
-	"loki" : {
-	  "url": "http://127.0.0.1:3100/api/prom/push"
-	},
 	"rethink" : {
 	  "servers":[
 	    { "host": "127.0.0.1", "port":28015 }
@@ -50,5 +44,5 @@
      	  "index": "hep"
         }
   },
-  "debug": false
+  "debug": true
 }
